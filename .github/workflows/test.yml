@@ -13,3 +13,19 @@ jobs:
       - run: npm ci
       # every sample tokenizes with no unrecognised text
       - run: npm test
+
+  tree-sitter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tree-sitter-mimic
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      # the committed parser is the one grammar.js generates
+      - run: npx tree-sitter generate && git diff --exit-code src
+      # the corpus, and every sample parses with no error
+      - run: npm test

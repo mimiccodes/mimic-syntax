@@ -1,0 +1,204 @@
+================================================================================
+Module, function, type and extern
+================================================================================
+
+module main
+
+trusted extern "C" pure include "math.h"
+
+// a point
+type Point = { x: f64, y: f64 }
+
+type Shape = Circle(f64) | Rect(f64, f64)
+
+pub fn area(s: Shape) -> f64 { 0.0 }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (identifier))
+  (extern_block
+    (string
+      (string_content))
+    (effect)
+    (string
+      (string_content)))
+  (comment)
+  (type_declaration
+    (type_identifier)
+    (record_type
+      (field_declaration
+        (identifier)
+        (builtin_type))
+      (field_declaration
+        (identifier)
+        (builtin_type))))
+  (type_declaration
+    (type_identifier)
+    (union_type
+      (variant
+        (type_identifier)
+        (builtin_type))
+      (variant
+        (type_identifier)
+        (builtin_type)
+        (builtin_type))))
+  (function_declaration
+    (visibility)
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (type_identifier)))
+    (builtin_type)
+    (block
+      (expression
+        (number)))))
+
+================================================================================
+Let, lambdas, glyphs and calls
+================================================================================
+
+fn main() {
+    let mut xs = [3 ¯1 4] ▷ +/
+    print(⍳ 10 ¨ (i => i × 2) ⌿ (xs > 4))
+    let back = json::decode[[i64]]("[1]") else { return }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters)
+    (block
+      (let_statement
+        (identifier)
+        (expression
+          (array
+            (expression
+              (number)
+              (number)
+              (number)))
+          (operator)
+          (primitive)
+          (call
+            (primitive)
+            (expression
+              (primitive)
+              (number)
+              (primitive)
+              (parenthesized
+                (expression
+                  (identifier)
+                  (identifier)
+                  (operator)
+                  (number)))
+              (primitive)
+              (parenthesized
+                (expression
+                  (identifier)
+                  (operator)
+                  (number)))))))
+      (let_statement
+        (identifier)
+        (expression
+          (call
+            (type_arguments_call
+              (path
+                (namespace
+                  (namespace_name))
+                (namespace
+                  (namespace_name)))
+              (array_type
+                (builtin_type)))
+            (expression
+              (string
+                (string_content))))
+          (control)
+          (block
+            (return_statement)))))))
+
+================================================================================
+Strings, interpolation and raw strings
+================================================================================
+
+fn main() { print("total {xs:.2} \{lit\} {if a { "y" } else { "n" }}\n" + 'raw {x}') }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters)
+    (block
+      (expression
+        (call
+          (primitive)
+          (expression
+            (string
+              (string_content)
+              (interpolation
+                (identifier)
+                (format_spec))
+              (string_content)
+              (escape_sequence)
+              (string_content)
+              (escape_sequence)
+              (string_content)
+              (interpolation
+                (control)
+                (identifier)
+                (block
+                  (expression
+                    (string
+                      (string_content))))
+                (control)
+                (block
+                  (expression
+                    (string
+                      (string_content)))))
+              (escape_sequence))
+            (operator)
+            (raw_string)))))))
+
+================================================================================
+Project files
+================================================================================
+
+module mim
+
+project {
+    name = "app"
+    kind = [bin]
+}
+
+profile release { opt = 3 }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (identifier))
+  (config_entry
+    (identifier)
+    (block
+      (expression
+        (identifier)
+        (operator)
+        (string
+          (string_content))
+        (identifier)
+        (operator)
+        (array
+          (expression
+            (identifier))))))
+  (config_entry
+    (identifier)
+    (identifier)
+    (block
+      (expression
+        (identifier)
+        (operator)
+        (number)))))

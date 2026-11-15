@@ -1,0 +1,33 @@
+{
+  "name": "tree-sitter-mimic",
+  "version": "0.3.3",
+  "description": "Mimic grammar for tree-sitter",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/mimiccodes/mimic-syntax",
+  "keywords": [
+    "tree-sitter",
+    "mimic",
+    "parser"
+  ],
+  "files": [
+    "grammar.js",
+    "queries/*",
+    "src/**"
+  ],
+  "tree-sitter": [
+    {
+      "scope": "source.mimic",
+      "file-types": [
+        "mim"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test && node ../test/tree-sitter-parse.mjs ../samples/Mimic"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "0.25.10"
+  }
+}
