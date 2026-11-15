@@ -1,0 +1,42 @@
+module shapes
+
+// A union type: a value is exactly one of its variants.
+// Type and variant names start with an uppercase letter.
+pub type Shape =
+    | Circle(f64)
+    | Rect(f64, f64)
+    | Square(f64)
+    | Dot
+
+pub fn demo() {
+    print(showcase::banner("shapes: unions and match"))
+    let all = [Circle(1.0), Rect(2.0, 3.0), Square(2.0), Dot]
+    print(all)
+    print(all ¨ area)
+    print(all ¨ describe)
+    print(all ¨ area ▷ +/)
+    print(units::cm_to_inch(254.0))   // a nested module
+}
+
+// `match` must cover every variant (or end with `_ =>`): the compiler checks.
+pub fn area(s: Shape) -> f64 {
+    match s {
+        Circle(r) => 3.14159 × r × r
+        Rect(w, h) => w × h
+        Square(side) => side × side
+        Dot => 0.0
+    }
+}
+
+fn describe(s: Shape) -> str {
+    match s {
+        Circle(_) => "round"
+        Rect(w, h) => if w == h { "square-ish" } else { "rect" }
+        Square(_) => "square"
+        _ => "point"
+    }
+}
+
+pub module units {
+    pub fn cm_to_inch(cm: f64) -> f64 { cm ÷ 2.54 }
+}

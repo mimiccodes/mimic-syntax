@@ -1,0 +1,9 @@
+// fib(n) = n < 2 ? n : fib(n-1) + fib(n-2)
+// The two recursive calls are independent redexes: they reduce in parallel.
+@fib    = ({n0 n1} r) & n0 ~ $<(#2 c) & c ~ ?((@fib_lt @fib_ge) (n1 r))
+@fib_lt = (n n)
+@fib_ge = ({a b} r)
+        & a ~ $-(#1 a1) & @fib ~ (a1 ra)
+        & b ~ $-(#2 b1) & @fib ~ (b1 rb)
+        & ra ~ $+(rb r)
+@main   = r & @fib ~ (#20 r)

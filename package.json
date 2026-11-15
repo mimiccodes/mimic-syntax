@@ -1,0 +1,15 @@
+{
+  "name": "mimic-syntax",
+  "version": "0.3.3",
+  "private": true,
+  "description": "Grammars for the Mimic language (.mim, .mnet)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "test": "node test/highlight.mjs samples"
+  },
+  "devDependencies": {
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.2.0"
+  }
+}

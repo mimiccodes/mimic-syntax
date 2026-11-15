@@ -1,0 +1,6 @@
+// Higher-order sharing: Church numerals duplicate lambdas, which exercises
+// the COMMUTE rule (DUP passing through CON). (c2 c3) inc 0 = 3^2 = 9
+@c2  = ({f1 f2} (x r)) & f1 ~ (x y) & f2 ~ (y r)
+@c3  = ({1 f1 {1 f2 f3}} (x r)) & f1 ~ (x y) & f2 ~ (y z) & f3 ~ (z r)
+@inc = (a r) & a ~ $+(#1 r)
+@main = r & @c2 ~ (@c3 (@inc (#0 r)))

@@ -1,0 +1,25 @@
+module mim
+
+// Project settings. See docs/manifest.md for every field.
+project {
+    name = "showcase"
+    version = "0.1.0"
+    authors = []
+    description = "A tour of every Mimic feature built so far"
+    readme = "README.md"
+    license = "MIT"
+    edition = "2026"
+    kind = [bin, lib]
+}
+
+// Libraries declared here are usable from every file as `name::item`
+// without an import (`use name::item` also works).
+//   speech = { git = "github.com/harcorp/speech.git" }
+//   util   = { path = "../util" }
+dependencies {
+}
+
+// C libraries for `extern "C"` blocks.
+ffi {
+    link = []
+}

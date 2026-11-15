@@ -1,0 +1,36 @@
+module main
+
+// A clock that ticks by itself, and a button that starts slow work without
+// freezing the page: `mimic run examples/clock/clock.mim`.
+
+type Msg = Tick | Roll | Rolled(i64)
+type State = { now: i64, rolling: bool, rolls: [i64] }
+
+fn slow_roll() -> i64 {
+    time::sleep(800ms)                        // stands for a slow request
+    random::int(1, 7)
+}
+
+fn update(s: State, m: Msg) -> ui::Step[State, Msg] {
+    match m {
+        Tick => ui::stay({ s with now: time::now() }),
+        Roll => ui::then({ s with rolling: true }, () => Rolled(slow_roll())),
+        Rolled(n) => ui::stay({ s with rolling: false, rolls: push(s.rolls, n) }),
+    }
+}
+
+fn view(s: State) -> ui::Node[Msg] {
+    ui::column(gap: 16, [
+        ui::text(time::format(s.now), size: 28, weight: "bold"),
+        ui::row([
+            ui::button("Roll a die", on_click: Roll),
+            ui::text(if s.rolling { "rolling…" } else { "" }, color: "#888"),
+        ]),
+        ui::text("rolls: {s.rolls}"),
+    ])
+}
+
+fn main() {
+    let init = State { now: time::now(), rolling: false, rolls: [] }
+    print(ui::run_live(init, view, update, subscriptions: [ui::every(1s, Tick)], title: "Clock"))
+}

@@ -1,0 +1,51 @@
+module compute
+
+// Pure recursive functions compile to interaction nets, so independent calls
+// (like the two `fib` calls below) run on different cores — no annotations.
+pub fn demo() {
+    print(showcase::banner("compute: parallel by default"))
+    print(fib(27))
+    print(tri(100000))                // 100,000-deep recursion: the net takes over from the stack
+    print(ackermann(2, 50))
+    print(gcd(1071, 462))
+    print(collatz(27))
+    print([10 20 25] ¨ fib)           // ¨ with a pure function runs in parallel
+    let big = ⍳ 5000000
+    print(big × 2 ▷ +/)               // array kernels run on all cores
+    print(⍳ 3 ¨ shout ▷ +/)           // impure functions keep program order
+}
+
+pub fn fib(n: i64) -> i64 {
+    if n < 2 {
+        return n
+    }
+    fib(n - 1) + fib(n - 2)
+}
+
+fn tri(n: i64) -> i64 {
+    if n == 0 { 0 } else { n + tri(n - 1) }
+}
+
+fn ackermann(m: i64, n: i64) -> i64 {
+    if m == 0 {
+        return n + 1
+    }
+    if n == 0 {
+        return ackermann(m - 1, 1)
+    }
+    ackermann(m - 1, ackermann(m, n - 1))
+}
+
+fn gcd(a: i64, b: i64) -> i64 {
+    if b == 0 { abs(a) } else { gcd(b, a % b) }
+}
+
+// steps for the Collatz sequence starting at n to reach 1
+fn collatz(n: i64) -> i64 {
+    if n == 1 { 0 } else if n % 2 == 0 { 1 + collatz(n div 2) } else { 1 + collatz(3 × n + 1) }
+}
+
+fn shout(x: i64) -> i64 {
+    print("  shout {x}")
+    x
+}
