@@ -21,7 +21,7 @@ Syntax grammars for [Mimic](https://github.com/mimiccodes/mimic), the array lang
 ## Use
 
 * **VS Code:** the [Mimic extension](https://github.com/mimiccodes/mimic-vscode) includes these grammars.
-* **Sublime Text, TextMate and other editors with TextMate grammars:** use the files in `grammars/`. `language-configuration.json` has the comment and bracket settings in VS Code's format.
+* **TextMate and other editors that read TextMate grammars in JSON:** use the files in `grammars/` (Sublime Text needs them converted to `.sublime-syntax`). `language-configuration.json` has the comment and bracket settings in VS Code's format.
 * **GitHub:** GitHub highlights a language once [Linguist](https://github.com/github-linguist/linguist) knows it. `samples/` holds the sample files a Linguist entry needs; the request is made once `.mim` files are used in enough repositories.
 
 ## Tree-sitter (Neovim, Helix, Zed)
