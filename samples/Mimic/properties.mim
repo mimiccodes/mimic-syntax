@@ -1,0 +1,19 @@
+module main
+
+fn main() { print(1) }
+
+test "sorting keeps the length" for xs: [i64] {
+    expect(≢ sort(xs) == ≢ xs)
+}
+
+test "abs is never negative" for x: i64 {
+    expect(∣ x >= 0)
+}
+
+test "every list is short" for xs: [i64] {
+    expect(≢ xs < 3)
+}
+
+test "sums are small" for a: i64, b: i64 {
+    expect(a + b < 50)
+}

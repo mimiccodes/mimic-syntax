@@ -52,8 +52,10 @@
 (control) @keyword.conditional
 
 [
-  "module" "§" "fn" "ƒ" "type" "use" "as" "extern" "trusted" "include" "test" "let" "mut"
+  "module" "§" "fn" "ƒ" "type" "use" "as" "extern" "trusted" "include" "test" "let" "mut" "for"
 ] @keyword
+
+["requires" "ensures"] @keyword.debug
 
 "return" @keyword.return
 

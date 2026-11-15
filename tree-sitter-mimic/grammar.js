@@ -42,6 +42,9 @@ module.exports = grammar({
   word: ($) => $.identifier,
 
   conflicts: ($) => [
+    [$._condition, $.record_literal],
+    [$.record_literal, $._interpolated_term],
+    [$.record_literal, $._term],
     [$.scoped_type, $.path],
     [$.tuple_type, $.parenthesized],
     [$.generic_type, $._term],
@@ -88,8 +91,18 @@ module.exports = grammar({
       optional($.type_parameters),
       field('parameters', $.parameters),
       optional(seq(choice('->', '→'), field('return_type', $._type))),
+      repeat($.contract),
       field('body', $.block),
     ),
+
+    // `requires n >= 0`, `ensures result > 0`
+    contract: ($) => seq(choice('requires', 'ensures'), field('condition', alias($._condition, $.expression))),
+
+    // an expression with no bare block in it: the function's body follows
+    _condition: ($) => prec.right(5, repeat1(choice(
+      $.number, $.duration, $.string, $.raw_string, $.boolean, $.identifier, $.type_identifier, $.path, $.call,
+      $.index, $.field_access, $.parenthesized, $.array, $.primitive, $.operator, $.keyword_operator, $.digraph,
+    ))),
 
     type_parameters: ($) => seq('[', commaSep($.type_identifier), ']'),
 
@@ -151,7 +164,8 @@ module.exports = grammar({
       choice($.block, seq('=', $.expression)),
     )),
 
-    test_block: ($) => seq('test', $.string, $.block),
+    // `test "…" for x: i64, xs: [i64] { … }`: a property test
+    test_block: ($) => seq('test', $.string, optional(seq('for', commaSep($.parameter))), $.block),
 
     // ---- types -------------------------------------------------------------
 
@@ -250,7 +264,10 @@ module.exports = grammar({
 
     index: ($) => prec(3, seq(choice($.identifier, $.call, $.field_access, $.index, $.parenthesized), token.immediate('['), commaSep($.expression), ']')),
 
-    field_access: ($) => prec(3, seq(choice($.identifier, $.call, $.index, $.parenthesized, $.field_access, $.block), token.immediate('.'), field('field', choice($.identifier, alias(token.immediate(/\d+/), $.number))))),
+    // `Point { x: 1 }.x`: a record literal's field
+    record_literal: ($) => seq(choice($.type_identifier, $.scoped_type), $.block),
+
+    field_access: ($) => prec(3, seq(choice($.identifier, $.call, $.index, $.parenthesized, $.field_access, $.record_literal, $.block), token.immediate('.'), field('field', choice($.identifier, alias(token.immediate(/\d+/), $.number))))),
 
     lambda: ($) => prec.right(seq(
       field('parameters', choice($.identifier, seq('(', commaSep($.identifier), ')'))),

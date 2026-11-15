@@ -1,0 +1,25 @@
+module main
+
+// The whole square root of n.
+fn isqrt(n: i64) -> i64
+    requires n >= 0
+    ensures result * result <= n and (result + 1) * (result + 1) > n
+{
+    if n < 2 { return n }
+    let r = isqrt(n div 4) * 2
+    if (r + 1) * (r + 1) <= n { r + 1 } else { r }
+}
+
+fn wrong(n: i64) -> i64
+    ensures result > n
+{
+    if n > 5 { return n }
+    n + 1
+}
+
+fn main() {
+    print(isqrt(17))
+    print(isqrt(1000000))
+    print(wrong(3))
+    print(wrong(9))
+}

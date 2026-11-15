@@ -202,3 +202,64 @@ profile release { opt = 3 }
         (identifier)
         (operator)
         (number)))))
+
+================================================================================
+Contracts and property tests
+================================================================================
+
+fn isqrt(n: i64) -> i64
+    requires n >= 0
+    ensures result * result <= n
+{
+    n
+}
+
+test "sorting keeps the length" for xs: [i64] {
+    expect(≢ sort(xs) == ≢ xs)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (builtin_type)))
+    (builtin_type)
+    (contract
+      (expression
+        (identifier)
+        (operator)
+        (number)))
+    (contract
+      (expression
+        (identifier)
+        (operator)
+        (identifier)
+        (operator)
+        (identifier)))
+    (block
+      (expression
+        (identifier))))
+  (test_block
+    (string
+      (string_content))
+    (parameter
+      (identifier)
+      (array_type
+        (builtin_type)))
+    (block
+      (expression
+        (call
+          (identifier)
+          (expression
+            (primitive)
+            (call
+              (identifier)
+              (expression
+                (identifier)))
+            (operator)
+            (primitive)
+            (identifier)))))))

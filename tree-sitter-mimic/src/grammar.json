@@ -275,6 +275,13 @@
           ]
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "contract"
+          }
+        },
+        {
           "type": "FIELD",
           "name": "body",
           "content": {
@@ -283,6 +290,117 @@
           }
         }
       ]
+    },
+    "contract": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "requires"
+            },
+            {
+              "type": "STRING",
+              "value": "ensures"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_condition"
+            },
+            "named": true,
+            "value": "expression"
+          }
+        }
+      ]
+    },
+    "_condition": {
+      "type": "PREC_RIGHT",
+      "value": 5,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "duration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "raw_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "boolean"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "path"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "call"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "index"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "field_access"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "parenthesized"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "array"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "primitive"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "operator"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_operator"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "digraph"
+            }
+          ]
+        }
+      }
     },
     "type_parameters": {
       "type": "SEQ",
@@ -1151,6 +1269,68 @@
         {
           "type": "SYMBOL",
           "name": "string"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "for"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "parameter"
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "STRING",
+                                "value": ","
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "parameter"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "STRING",
+                              "value": ","
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -2636,6 +2816,28 @@
         ]
       }
     },
+    "record_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "scoped_type"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
+        }
+      ]
+    },
     "field_access": {
       "type": "PREC",
       "value": 3,
@@ -2664,6 +2866,10 @@
               {
                 "type": "SYMBOL",
                 "name": "field_access"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "record_literal"
               },
               {
                 "type": "SYMBOL",
@@ -3253,6 +3459,18 @@
     }
   ],
   "conflicts": [
+    [
+      "_condition",
+      "record_literal"
+    ],
+    [
+      "record_literal",
+      "_interpolated_term"
+    ],
+    [
+      "record_literal",
+      "_term"
+    ],
     [
       "scoped_type",
       "path"
