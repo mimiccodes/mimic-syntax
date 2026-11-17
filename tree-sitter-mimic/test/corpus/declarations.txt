@@ -263,3 +263,32 @@ test "sorting keeps the length" for xs: [i64] {
             (operator)
             (primitive)
             (identifier)))))))
+
+================================================================================
+Braces in strings
+================================================================================
+
+module main
+
+fn f(x: i64) -> str { "a \{ b } c {x}" }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (identifier))
+  (function_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (builtin_type)))
+    (builtin_type)
+    (block
+      (expression
+        (string
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (interpolation
+            (identifier)))))))

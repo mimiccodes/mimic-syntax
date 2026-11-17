@@ -299,7 +299,8 @@ module.exports = grammar({
       token.immediate('"'),
     ),
 
-    string_content: (_) => token.immediate(prec(1, /[^"\\{}]+/)),
+    // `{` starts an interpolation; a lone `}` is text
+    string_content: (_) => token.immediate(prec(1, /[^"\\{]+/)),
 
     escape_sequence: (_) => token.immediate(seq('\\', choice(/[ntr0\\"{}]/, /x[0-9A-Fa-f]{2}/, /u\{[0-9A-Fa-f]{1,6}\}/))),
 
