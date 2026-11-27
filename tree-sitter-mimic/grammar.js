@@ -243,7 +243,7 @@ module.exports = grammar({
       '->',
     ),
 
-    control: (_) => choice('if', '⍰', 'else', '⋄', 'match', '⊨', 'with', '⊕', 'arms', '⋔', 'unsafe', '☡', token(prec(2, seq('if', /\s+/, 'let')))),
+    control: (_) => choice('if', '⍰', 'else', '⋄', 'match', '⊨', 'with', '⊕', 'arms', '⋔', 'unsafe', '☡', 'while', '⟳', 'for', '∀', 'in', 'break', '↯', token(prec(2, seq('if', /\s+/, 'let')))),
 
     keyword_operator: (_) => choice('and', 'or', 'not', 'div'),
 
