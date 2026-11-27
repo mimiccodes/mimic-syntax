@@ -2164,6 +2164,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "empty_list"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
         },
         {
@@ -3309,6 +3313,10 @@
           "value": "○"
         }
       ]
+    },
+    "empty_list": {
+      "type": "STRING",
+      "value": "⍬"
     },
     "number": {
       "type": "TOKEN",

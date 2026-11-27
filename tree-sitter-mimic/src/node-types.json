@@ -231,6 +231,10 @@
           "named": true
         },
         {
+          "type": "empty_list",
+          "named": true
+        },
+        {
           "type": "field_access",
           "named": true
         },
@@ -1695,6 +1699,10 @@
   {
     "type": "else",
     "named": false
+  },
+  {
+    "type": "empty_list",
+    "named": true
   },
   {
     "type": "ensures",
