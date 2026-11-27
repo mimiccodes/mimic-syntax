@@ -1,0 +1,19 @@
+module main
+
+// `a` is a character's code, a number: text work on bytes compares and
+// computes with it, no one-letter string made
+
+fn vowel(c: i64) -> bool { c == `a` or c == `e` or c == `i` or c == `o` or c == `u` }
+
+fn rot13(c: i64) -> i64 {
+    if c >= `a` and c <= `z` { (c - `a` + 13) % 26 + `a` } else { c }
+}
+
+fn main() {
+    let b = bytes::of_text("hello, world")
+    print(b ¨ (c => if vowel(c) { 1 } else { 0 }) ▷ +/)
+    print(bytes::to_text(bytes::from(b ¨ rot13)) else { "?" })
+    print("{`a`} {`é`}")
+    print(`\n` + `\`` + `\x1b` + `\u{e9}`)
+    print(`0` + 7 == char_code("7"))
+}
