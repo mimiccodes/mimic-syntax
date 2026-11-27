@@ -70,6 +70,10 @@
           "named": true
         },
         {
+          "type": "mut_binding",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         }
@@ -944,6 +948,22 @@
     }
   },
   {
+    "type": "mut_binding",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "namespace",
     "named": true,
     "fields": {},
@@ -1463,6 +1483,11 @@
     }
   },
   {
+    "type": "visibility",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -1832,6 +1857,10 @@
     "named": false
   },
   {
+    "type": "pub",
+    "named": false
+  },
+  {
     "type": "pure",
     "named": false
   },
@@ -1944,10 +1973,6 @@
     "named": false
   },
   {
-    "type": "visibility",
-    "named": true
-  },
-  {
     "type": "with",
     "named": false
   },
@@ -2024,7 +2049,23 @@
     "named": false
   },
   {
+    "type": "⇄",
+    "named": false
+  },
+  {
+    "type": "⇐",
+    "named": false
+  },
+  {
+    "type": "⇑",
+    "named": false
+  },
+  {
     "type": "⇒",
+    "named": false
+  },
+  {
+    "type": "∀",
     "named": false
   },
   {
@@ -2044,6 +2085,10 @@
     "named": false
   },
   {
+    "type": "≔",
+    "named": false
+  },
+  {
     "type": "≠",
     "named": false
   },
@@ -2060,11 +2105,35 @@
     "named": false
   },
   {
+    "type": "⊕",
+    "named": false
+  },
+  {
     "type": "⊠",
     "named": false
   },
   {
+    "type": "⊡",
+    "named": false
+  },
+  {
+    "type": "⊢",
+    "named": false
+  },
+  {
+    "type": "⊨",
+    "named": false
+  },
+  {
+    "type": "⋄",
+    "named": false
+  },
+  {
     "type": "⋔",
+    "named": false
+  },
+  {
+    "type": "⌁",
     "named": false
   },
   {
@@ -2108,6 +2177,10 @@
     "named": false
   },
   {
+    "type": "⍰",
+    "named": false
+  },
+  {
     "type": "⍳",
     "named": false
   },
@@ -2120,7 +2193,31 @@
     "named": false
   },
   {
+    "type": "⎘",
+    "named": false
+  },
+  {
+    "type": "⏎",
+    "named": false
+  },
+  {
     "type": "▷",
+    "named": false
+  },
+  {
+    "type": "○",
+    "named": false
+  },
+  {
+    "type": "●",
+    "named": false
+  },
+  {
+    "type": "☡",
+    "named": false
+  },
+  {
+    "type": "✓",
     "named": false
   },
   {
