@@ -193,7 +193,10 @@ module.exports = grammar({
 
     // ---- statements --------------------------------------------------------
 
-    block: ($) => seq('{', repeat(choice($.let_statement, $.return_statement, $.expression, ',', ';')), '}'),
+    block: ($) => seq('{', repeat(choice($.let_statement, $.mut_binding, $.return_statement, $.expression, ',', ';')), '}'),
+
+    // `mut x ← 1` (`⇄ x ← 1`): a mutable binding without `let`
+    mut_binding: ($) => prec.right(seq(choice('mut', '⇄'), field('value', $.expression))),
 
     let_statement: ($) => prec.right(seq(
       'let',

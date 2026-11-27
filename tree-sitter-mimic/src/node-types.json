@@ -70,6 +70,10 @@
           "named": true
         },
         {
+          "type": "mut_binding",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         }
@@ -941,6 +945,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "mut_binding",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
