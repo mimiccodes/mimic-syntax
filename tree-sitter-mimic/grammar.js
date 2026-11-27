@@ -219,6 +219,7 @@ module.exports = grammar({
       $.string,
       $.raw_string,
       $.boolean,
+      $.empty_list,
       $.identifier,
       $.type_identifier,
       $.path,
@@ -283,6 +284,9 @@ module.exports = grammar({
     array: ($) => seq('[', repeat(choice($.expression, ',')), ']'),
 
     boolean: (_) => choice('true', '●', 'false', '○'),
+
+    // `⍬`: an empty list of i64 (`⍬[f64]`: the type follows as an index)
+    empty_list: (_) => '⍬',
 
     number: (_) => token(seq(
       optional('¯'),

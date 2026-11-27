@@ -1,0 +1,8 @@
+module main
+
+fn grow(n: i64) -> [i64] { ⍬ ▷ evolve(n, xs => push(xs, ≢ xs)) }
+
+fn main() {
+    let names = ⍬[str]
+    print("{grow(3)} {≢ names} {[256 -1 255]}")
+}
