@@ -3150,7 +3150,7 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
 };
 
 static const TSCharacterRange sym_digraph_character_set_1[] = {
-  {'!', '!'}, {'#', '#'}, {'%', '&'}, {'.', '/'}, {'<', '>'}, {'A', 'Z'}, {'^', '_'}, {'a', 'z'},
+  {'!', '!'}, {'#', '#'}, {'%', '&'}, {'.', ':'}, {'<', '?'}, {'A', 'Z'}, {'^', '_'}, {'a', 'z'},
   {'|', '|'},
 };
 
