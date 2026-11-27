@@ -37,6 +37,7 @@
 (duration) @number
 (boolean) @boolean
 (empty_list) @constant.builtin
+(character) @character
 (string) @string
 (raw_string) @string
 (escape_sequence) @string.escape

@@ -220,6 +220,7 @@ module.exports = grammar({
       $.raw_string,
       $.boolean,
       $.empty_list,
+      $.character,
       $.identifier,
       $.type_identifier,
       $.path,
@@ -288,6 +289,9 @@ module.exports = grammar({
     // `⍬`: an empty list of i64 (`⍬[f64]`: the type follows as an index)
     empty_list: (_) => '⍬',
 
+    // `a`: a character's code, a number (`\n`, `\``, `\x1b`, `\u{e9}`)
+    character: (_) => token(seq('`', choice(/[^`\\\n]/, /\\[ntr0\\`'"]/, /\\x[0-9a-fA-F]{2}/, /\\u\{[0-9a-fA-F]+\}/), '`')),
+
     number: (_) => token(seq(
       optional('¯'),
       choice(
@@ -319,7 +323,7 @@ module.exports = grammar({
     ),
 
     _interpolated_term: ($) => choice(
-      $.number, $.string, $.raw_string, $.boolean, $.identifier, $.type_identifier, $.path, $.call, $.index,
+      $.number, $.string, $.raw_string, $.boolean, $.character, $.empty_list, $.identifier, $.type_identifier, $.path, $.call, $.index,
       $.field_access, $.parenthesized, $.array, $.primitive, $.operator, $.keyword_operator, $.control,
       $.block, $.lambda, '=>', '⇒',
     ),

@@ -219,6 +219,10 @@
           "named": true
         },
         {
+          "type": "character",
+          "named": true
+        },
+        {
           "type": "control",
           "named": true
         },
@@ -716,7 +720,15 @@
           "named": true
         },
         {
+          "type": "character",
+          "named": true
+        },
+        {
           "type": "control",
+          "named": true
+        },
+        {
+          "type": "empty_list",
           "named": true
         },
         {
@@ -1658,6 +1670,10 @@
   {
     "type": "char",
     "named": false
+  },
+  {
+    "type": "character",
+    "named": true
   },
   {
     "type": "comment",
