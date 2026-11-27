@@ -251,7 +251,7 @@ module.exports = grammar({
 
     operator: (_) => choice(...OPERATORS),
 
-    digraph: (_) => token(seq('\\', /[A-Za-z^#.&|!_<>=\/%]/)),
+    digraph: (_) => token(seq('\\', /[A-Za-z0-9^#.&|!_<>=\/%?:]/)),
 
     path: ($) => prec(2, seq($.namespace, repeat1(seq('::', choice($.namespace, $.type_identifier))))),
 
