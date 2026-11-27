@@ -1,0 +1,39 @@
+§ main
+
+⍝ keywords as glyphs: ⊡ type, ⇑ pub, ⍰ if, ⋄ else, ⏎ return, ⊨ match,
+⍝ ⊕ with, ⇄ mut, ● true, ○ false
+⊡ P = { x: i64, y: i64 }
+
+⇑ ƒ sign(n: i64) → i64 {
+    ⍰ n < 0 { ⏎ ¯1 }
+    ⍰ n == 0 { 0 } ⋄ { 1 }
+}
+
+ƒ bump(p: P) → P { { p ⊕ x: p.x + 1 } }
+
+ƒ kind(o: Option[i64]) → str {
+    ⊨ o {
+        Some(v) ⇒ "some {v}",
+        None ⇒ "none",
+    }
+}
+
+ƒ main() {
+    // each pair must print the same thing
+    print(⍳ 10 ⌽ ↑ 3 ▷ +/)
+    print(iota 10 |> reverse |> take(3) |> sum)
+    print([1 2 3] ¨ (x => x × x))
+    print(each([1 2 3], x => x * x))
+    print(⍳ 6 ⌿ [1 0 1 0 1 0])
+    print(keep(iota(6), [1 0 1 0 1 0]))
+    print(⍳ 4 ▷ ≢)
+    print(len(iota(4)))
+    x ← 5
+    let y = 5
+    print(x == y)
+    print(\i 3 \> \o)
+    ⇄ k ← 0
+    k ↩ k + 2
+    print("{sign(¯4)} {sign(0)} {sign(9)} {bump(P { x: 1, y: 2 }).x} {kind(Some(3))} {kind(None)} {k} {●} {○ ∨ ●}")
+    print("{sign(0 - 4)} {sign(0)} {sign(9)} {bump(P { x: 1, y: 2 }).x} {kind(Some(3))} {kind(None)} {k} {true} {false or true}")
+}

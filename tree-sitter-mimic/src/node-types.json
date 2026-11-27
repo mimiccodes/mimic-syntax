@@ -1463,6 +1463,11 @@
     }
   },
   {
+    "type": "visibility",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "!",
     "named": false
   },
@@ -1832,6 +1837,10 @@
     "named": false
   },
   {
+    "type": "pub",
+    "named": false
+  },
+  {
     "type": "pure",
     "named": false
   },
@@ -1944,10 +1953,6 @@
     "named": false
   },
   {
-    "type": "visibility",
-    "named": true
-  },
-  {
     "type": "with",
     "named": false
   },
@@ -2024,7 +2029,23 @@
     "named": false
   },
   {
+    "type": "⇄",
+    "named": false
+  },
+  {
+    "type": "⇐",
+    "named": false
+  },
+  {
+    "type": "⇑",
+    "named": false
+  },
+  {
     "type": "⇒",
+    "named": false
+  },
+  {
+    "type": "∀",
     "named": false
   },
   {
@@ -2044,6 +2065,10 @@
     "named": false
   },
   {
+    "type": "≔",
+    "named": false
+  },
+  {
     "type": "≠",
     "named": false
   },
@@ -2060,11 +2085,35 @@
     "named": false
   },
   {
+    "type": "⊕",
+    "named": false
+  },
+  {
     "type": "⊠",
     "named": false
   },
   {
+    "type": "⊡",
+    "named": false
+  },
+  {
+    "type": "⊢",
+    "named": false
+  },
+  {
+    "type": "⊨",
+    "named": false
+  },
+  {
+    "type": "⋄",
+    "named": false
+  },
+  {
     "type": "⋔",
+    "named": false
+  },
+  {
+    "type": "⌁",
     "named": false
   },
   {
@@ -2108,6 +2157,10 @@
     "named": false
   },
   {
+    "type": "⍰",
+    "named": false
+  },
+  {
     "type": "⍳",
     "named": false
   },
@@ -2120,7 +2173,31 @@
     "named": false
   },
   {
+    "type": "⎘",
+    "named": false
+  },
+  {
+    "type": "⏎",
+    "named": false
+  },
+  {
     "type": "▷",
+    "named": false
+  },
+  {
+    "type": "○",
+    "named": false
+  },
+  {
+    "type": "●",
+    "named": false
+  },
+  {
+    "type": "☡",
+    "named": false
+  },
+  {
+    "type": "✓",
     "named": false
   },
   {

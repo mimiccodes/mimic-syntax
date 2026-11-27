@@ -74,7 +74,7 @@ module.exports = grammar({
 
     // ---- declarations ----------------------------------------------------
 
-    visibility: (_) => 'pub',
+    visibility: (_) => choice('pub', '⇑'),
 
     module_declaration: ($) => prec.right(seq(
       optional($.visibility),
@@ -85,7 +85,7 @@ module.exports = grammar({
 
     function_declaration: ($) => seq(
       optional($.visibility),
-      optional(seq('extern', $.string)),
+      optional(seq(choice('extern', '⌁'), $.string)),
       choice('fn', 'ƒ'),
       field('name', $.identifier),
       optional($.type_parameters),
@@ -116,7 +116,7 @@ module.exports = grammar({
 
     type_declaration: ($) => seq(
       optional($.visibility),
-      'type',
+      choice('type', '⊡'),
       // (a lowercase name is an error the compiler explains; still a type here)
       field('name', choice($.type_identifier, alias($.identifier, $.type_identifier))),
       optional($.type_parameters),
@@ -132,15 +132,15 @@ module.exports = grammar({
 
     variant: ($) => prec.right(seq(field('name', $.type_identifier), optional(seq('(', commaSep($._type), ')')))),
 
-    use_declaration: ($) => seq('use', $.path, optional(seq('as', $.identifier))),
+    use_declaration: ($) => seq(choice('use', '⇐'), $.path, optional(seq(choice('as', '≔'), $.identifier))),
 
     extern_block: ($) => prec.right(seq(
       optional($.visibility),
-      optional('trusted'),
-      'extern',
+      optional(choice('trusted', '✓')),
+      choice('extern', '⌁'),
       $.string,
-      repeat(choice($.effect, seq('include', $.string), seq('as', alias($.identifier, $.namespace)))),
-      optional(seq('{', repeat(choice($.extern_function, seq('include', $.string), ',', ';')), '}')),
+      repeat(choice($.effect, seq(choice('include', '⎘'), $.string), seq(choice('as', '≔'), alias($.identifier, $.namespace)))),
+      optional(seq('{', repeat(choice($.extern_function, seq(choice('include', '⎘'), $.string), ',', ';')), '}')),
     )),
 
     effect: (_) => choice('pure', 'concurrent', 'ordered', 'sync'),
@@ -165,7 +165,7 @@ module.exports = grammar({
     )),
 
     // `test "…" for x: i64, xs: [i64] { … }`: a property test
-    test_block: ($) => seq('test', $.string, optional(seq('for', commaSep($.parameter))), $.block),
+    test_block: ($) => seq(choice('test', '⊢'), $.string, optional(seq(choice('for', '∀'), commaSep($.parameter))), $.block),
 
     // ---- types -------------------------------------------------------------
 
@@ -189,7 +189,7 @@ module.exports = grammar({
 
     tuple_type: ($) => seq('(', commaSep($._type), ')'),
 
-    function_type: ($) => prec.right(seq('fn', '(', commaSep($._type), ')', optional(seq(choice('->', '→'), $._type)))),
+    function_type: ($) => prec.right(seq(choice('fn', 'ƒ'), '(', commaSep($._type), ')', optional(seq(choice('->', '→'), $._type)))),
 
     // ---- statements --------------------------------------------------------
 
@@ -197,14 +197,14 @@ module.exports = grammar({
 
     let_statement: ($) => prec.right(seq(
       'let',
-      optional('mut'),
+      optional(choice('mut', '⇄')),
       field('pattern', choice($.identifier, seq('(', commaSep($.identifier), ')'))),
       optional(seq(':', field('type', $._type))),
       '=',
       field('value', $.expression),
     )),
 
-    return_statement: ($) => prec.right(seq('return', optional($.expression))),
+    return_statement: ($) => prec.right(seq(choice('return', '⏎'), optional($.expression))),
 
     // ---- expressions: a run of terms ---------------------------------------
 
@@ -238,7 +238,7 @@ module.exports = grammar({
       '->',
     ),
 
-    control: (_) => choice('if', 'else', 'match', 'with', 'arms', '⋔', 'unsafe', token(prec(2, seq('if', /\s+/, 'let')))),
+    control: (_) => choice('if', '⍰', 'else', '⋄', 'match', '⊨', 'with', '⊕', 'arms', '⋔', 'unsafe', '☡', token(prec(2, seq('if', /\s+/, 'let')))),
 
     keyword_operator: (_) => choice('and', 'or', 'not', 'div'),
 
@@ -279,7 +279,7 @@ module.exports = grammar({
 
     array: ($) => seq('[', repeat(choice($.expression, ',')), ']'),
 
-    boolean: (_) => choice('true', 'false'),
+    boolean: (_) => choice('true', '●', 'false', '○'),
 
     number: (_) => token(seq(
       optional('¯'),

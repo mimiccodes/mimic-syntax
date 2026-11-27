@@ -52,12 +52,12 @@
 (control) @keyword.conditional
 
 [
-  "module" "§" "fn" "ƒ" "type" "use" "as" "extern" "trusted" "include" "test" "let" "mut" "for"
+  "module" "§" "fn" "ƒ" "type" "⊡" "use" "⇐" "as" "≔" "extern" "⌁" "trusted" "✓" "include" "⎘" "test" "⊢" "let" "mut" "⇄" "for" "∀"
 ] @keyword
 
 ["requires" "ensures"] @keyword.debug
 
-"return" @keyword.return
+["return" "⏎"] @keyword.return
 
 ["=>" "⇒" "->" "→"] @operator
 
