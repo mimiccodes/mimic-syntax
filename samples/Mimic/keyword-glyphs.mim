@@ -34,6 +34,8 @@
     print(\i 3 \> \o)
     ⇄ k ← 0
     k ↩ k + 2
+    k +↩ 3
+    k -= 3
     print("{sign(¯4)} {sign(0)} {sign(9)} {bump(P { x: 1, y: 2 }).x} {kind(Some(3))} {kind(None)} {k} {●} {○ ∨ ●}")
     print("{sign(0 - 4)} {sign(0)} {sign(9)} {bump(P { x: 1, y: 2 }).x} {kind(Some(3))} {kind(None)} {k} {true} {false or true}")
 }
