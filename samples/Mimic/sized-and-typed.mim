@@ -1,0 +1,17 @@
+module main
+
+// sized lists and typed maps in types
+
+type Body = { mass: f64, pos: [f64 × 3] }
+
+fn norm2(p: [f64 × 3]) -> f64 { +/ (p × p) }
+
+fn total(stock: [str: i64]) -> i64 { +/ values(stock) }
+
+fn main() {
+    let b = Body { mass: 1.0, pos: [1 2 2] }
+    let row: [i64 * 9] = ⍳ 9
+    let mut stock: [str: i64] = ["nut": 3]
+    stock["nut"] += 1
+    print(norm2(b.pos) + total(stock) + +/ row)
+}

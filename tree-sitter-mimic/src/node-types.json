@@ -17,7 +17,18 @@
   {
     "type": "array_type",
     "named": true,
-    "fields": {},
+    "fields": {
+      "length": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,

@@ -185,7 +185,8 @@ module.exports = grammar({
 
     scoped_type: ($) => seq($.namespace, repeat(seq('::', $.namespace)), '::', $.type_identifier),
 
-    array_type: ($) => seq('[', $._type, optional(seq(':', $._type)), ']'),
+    // `[i64]`, `[str: i64]` (a map), `[f64 × 3]` (a sized list)
+    array_type: ($) => seq('[', $._type, optional(choice(seq(':', $._type), seq(choice('×', '*'), field('length', $.number)))), ']'),
 
     tuple_type: ($) => seq('(', commaSep($._type), ')'),
 
